@@ -16,7 +16,7 @@ class App {
 
 fun main() {
     println(App().greeting)
-    val numPairs = Files.lines(Path("input.txt"))
+    val numPairs = Files.lines(Path("Input.txt"))
         .toList()
         .flatMap { str -> str.split("   ").zipWithNext() }
 //    println(numPairs)
