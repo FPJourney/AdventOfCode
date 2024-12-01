@@ -5,6 +5,7 @@ package day1
 
 import java.nio.file.Files
 import kotlin.io.path.Path
+import kotlin.math.abs
 
 class App {
     val greeting: String
@@ -18,5 +19,13 @@ fun main() {
     val numPairs = Files.lines(Path("input.txt"))
         .toList()
         .flatMap { str -> str.split("   ").zipWithNext() }
-    println(numPairs)
+//    println(numPairs)
+    val leftColumn = numPairs.map { it.first }.map { it.toInt() }.sorted()
+    val rightColumn = numPairs.map { it.second }.map { it.toInt() }.sorted()
+//    println(leftColumn)
+//    println(rightColumn)
+    println(leftColumn.zip(rightColumn) { a, b -> abs(b - a) }.sum())
+    //part 2
+    val appearances = leftColumn.map { n1 -> rightColumn.count { n2 -> n2 == n1 } }
+    println(leftColumn.zip(appearances) { a, b -> a * b }.sum())
 }
