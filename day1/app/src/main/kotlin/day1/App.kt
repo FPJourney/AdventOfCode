@@ -18,9 +18,13 @@ fun main() {
     println(App().greeting)
     val (left, right) = Path("day1/Input.txt").readLines()
         .map { line: String ->
-            val leftColumn = line.substringBefore(" ").toInt()
-            val rightColumn = line.substringAfterLast(" ").toInt()
-            leftColumn to rightColumn
+            //what I did + destructuring
+            val (leftNum, rightNum) = line.split("   ")
+            leftNum.toInt() to rightNum.toInt()
+            // livestream version
+//            val leftColumn = line.substringBefore(" ").toInt()
+//            val rightColumn = line.substringAfterLast(" ").toInt()
+//            leftColumn to rightColumn
         }.unzip()
         .let { Pair(it.first.sorted(), it.second.sorted()) }
     println(calculateDistancesBetween(left, right).sum())
