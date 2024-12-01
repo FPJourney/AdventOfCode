@@ -3,6 +3,9 @@
  */
 package day1
 
+import java.nio.file.Files
+import kotlin.io.path.Path
+
 class App {
     val greeting: String
         get() {
@@ -12,4 +15,8 @@ class App {
 
 fun main() {
     println(App().greeting)
+    val numPairs = Files.lines(Path("input.txt"))
+        .toList()
+        .flatMap { str -> str.split("   ").zipWithNext() }
+    println(numPairs)
 }
