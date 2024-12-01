@@ -10,22 +10,33 @@ import kotlin.math.abs
 class App {
     val greeting: String
         get() {
-            return "Hello World!"
+            return "Hello AdventOfCode 2024!"
         }
 }
 
 fun main() {
     println(App().greeting)
-    val numPairs = Files.lines(Path("Input.txt"))
+    val columns = Files.lines(Path("Input.txt"))
         .toList()
         .flatMap { str -> str.split("   ").zipWithNext() }
-//    println(numPairs)
-    val leftColumn = numPairs.map { it.first }.map { it.toInt() }.sorted()
-    val rightColumn = numPairs.map { it.second }.map { it.toInt() }.sorted()
-//    println(leftColumn)
-//    println(rightColumn)
-    println(leftColumn.zip(rightColumn) { a, b -> abs(b - a) }.sum())
+        .let { numPairs ->
+            Pair(
+                numPairs.map { it.first }.map { it.toInt() }.sorted(),
+                numPairs.map { it.second }.map { it.toInt() }.sorted()
+            )
+        }
+
+    println(calculateDistances(columns.first, columns.second).sum())
     //part 2
-    val appearances = leftColumn.map { n1 -> rightColumn.count { n2 -> n2 == n1 } }
-    println(leftColumn.zip(appearances) { a, b -> a * b }.sum())
+    val appearances = countAppearances(columns.first, columns.second)
+    println(calculateSimilarityScore(columns.first, appearances))
 }
+
+fun calculateDistances(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
+    leftColumn.zip(rightColumn) { a, b -> abs(b - a) }
+
+fun countAppearances(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
+    leftColumn.map { n1 -> rightColumn.count { n2 -> n2 == n1 } }
+
+fun calculateSimilarityScore(leftColumn: List<Int>, appearances: List<Int>): Int =
+    leftColumn.zip(appearances) { a, b -> a * b }.sum()
