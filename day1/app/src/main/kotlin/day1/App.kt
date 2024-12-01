@@ -42,7 +42,8 @@ fun countAppearances(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
     leftColumn.map { n1 -> rightColumn.count { n2 -> n2 == n1 } }
 
 fun countAppearancesKotlinLivestream(rightColumn: List<Int>): Map<Int, Int> =
-    //rightColumn.groupBy { it }.mapValues { it.values.size } // less efficient because it creates intermediate map
+//rightColumn.groupBy { it }.mapValues { it.values.size } // less efficient because it creates intermediate map
+    //maps are faster
     rightColumn.groupingBy { it }.eachCount()
 
 fun calculateSimilarityScore(leftColumn: List<Int>, appearances: List<Int>): Int =
