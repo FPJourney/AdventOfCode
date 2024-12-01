@@ -27,6 +27,8 @@ fun main() {
     //part 2
     val appearances = countAppearances(left, right)
     println(calculateSimilarityScore(left, appearances))
+    //adapted Kotlin Livestream version
+    left.foldIndexed(0) { i, acc, n -> acc + n * appearances[i] }.also(::println)
 }
 
 fun calculateDistancesBetween(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
@@ -34,6 +36,10 @@ fun calculateDistancesBetween(leftColumn: List<Int>, rightColumn: List<Int>): Li
 
 fun countAppearances(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
     leftColumn.map { n1 -> rightColumn.count { n2 -> n2 == n1 } }
+
+fun countAppearancesKotlinLivestream(rightColumn: List<Int>): Map<Int, Int> =
+    //rightColumn.groupBy { it }.mapValues { it.values.size } // less efficient because it creates intermediate map
+    rightColumn.groupingBy { it }.eachCount()
 
 fun calculateSimilarityScore(leftColumn: List<Int>, appearances: List<Int>): Int =
     leftColumn.zip(appearances) { a, b -> a * b }.sum()
