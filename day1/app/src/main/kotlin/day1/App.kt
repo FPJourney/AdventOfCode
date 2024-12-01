@@ -3,8 +3,8 @@
  */
 package day1
 
-import java.nio.file.Files
 import kotlin.io.path.Path
+import kotlin.io.path.readLines
 import kotlin.math.abs
 
 class App {
@@ -16,19 +16,17 @@ class App {
 
 fun main() {
     println(App().greeting)
-    val columns = Files.lines(Path("Input.txt"))
-        .toList()
-        .flatMap { str -> str.split("   ").zipWithNext() }
-        .let { numPairs ->
-            Pair(
-                numPairs.map { it.first }.map { it.toInt() }.sorted(),
-                numPairs.map { it.second }.map { it.toInt() }.sorted()
-            )
-        }
-    println(calculateDistancesBetween(columns.first, columns.second).sum())
+    val (left, right) = Path("day1/Input.txt").readLines()
+        .map { line: String ->
+            val leftColumn = line.substringBefore(" ").toInt()
+            val rightColumn = line.substringAfterLast(" ").toInt()
+            leftColumn to rightColumn
+        }.unzip()
+        .let { Pair(it.first.sorted(), it.second.sorted()) }
+    println(calculateDistancesBetween(left, right).sum())
     //part 2
-    val appearances = countAppearances(columns.first, columns.second)
-    println(calculateSimilarityScore(columns.first, appearances))
+    val appearances = countAppearances(left, right)
+    println(calculateSimilarityScore(left, appearances))
 }
 
 fun calculateDistancesBetween(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
