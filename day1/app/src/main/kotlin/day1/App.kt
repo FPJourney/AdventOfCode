@@ -25,14 +25,13 @@ fun main() {
                 numPairs.map { it.second }.map { it.toInt() }.sorted()
             )
         }
-
-    println(calculateDistances(columns.first, columns.second).sum())
+    println(calculateDistancesBetween(columns.first, columns.second).sum())
     //part 2
     val appearances = countAppearances(columns.first, columns.second)
     println(calculateSimilarityScore(columns.first, appearances))
 }
 
-fun calculateDistances(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
+fun calculateDistancesBetween(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
     leftColumn.zip(rightColumn) { a, b -> abs(b - a) }
 
 fun countAppearances(leftColumn: List<Int>, rightColumn: List<Int>): List<Int> =
