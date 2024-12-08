@@ -1,0 +1,17 @@
+package org.example
+
+import kotlin.io.path.Path
+import kotlin.io.path.readLines
+
+fun main() {
+    val levelDiffs: Sequence<List<Int>> =
+        read("day2/Input.txt").asSequence()
+            .map { str -> str.split("\\s".toRegex()).map { it.toInt() } }
+            .map { ints -> ints.zipWithNext { a, b -> b - a } }
+    levelDiffs.map { isSafeReport(it) }.count { it == true }.also(::println)
+}
+
+fun read(file: String) = Path(file).readLines()
+
+fun isSafeReport(levelDiffs: List<Int>): Boolean = levelDiffs.all { it > 0 && it in (1..3) } ||
+        levelDiffs.all { it < 0 && -it in (1..3) }
