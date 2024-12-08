@@ -8,7 +8,7 @@ fun main() {
         read("day2/Input.txt").asSequence()
             .map { str -> str.split("\\s".toRegex()).map { it.toInt() } }
             .map { ints -> ints.zipWithNext { a, b -> b - a } }
-    levelDiffs.map { isSafeReport(it) }.count { it == true }.also(::println)
+    levelDiffs.map(::isSafeReport).count { it == true }.also(::println)
 }
 
 fun read(file: String) = Path(file).readLines()
