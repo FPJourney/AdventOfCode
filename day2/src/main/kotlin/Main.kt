@@ -6,7 +6,7 @@ import kotlin.io.path.readLines
 fun main() {
     val reportListLevelDiffs: Sequence<List<Int>> =
         read("day2/Input.txt").asSequence()
-            .map { str -> str.split(" ").map { it.toInt() } }
+            .map { str -> str.split(" ").map(String::toInt) }
             .map { ints -> ints.zipWithNext { a, b -> b - a } }
     reportListLevelDiffs.map(::isSafeReport).count { it == true }.also(::println)
 }
