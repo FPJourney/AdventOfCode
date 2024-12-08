@@ -4,11 +4,11 @@ import kotlin.io.path.Path
 import kotlin.io.path.readLines
 
 fun main() {
-    val levelDiffs: Sequence<List<Int>> =
+    val reportListLevelDiffs: Sequence<List<Int>> =
         read("day2/Input.txt").asSequence()
             .map { str -> str.split(" ").map { it.toInt() } }
             .map { ints -> ints.zipWithNext { a, b -> b - a } }
-    levelDiffs.map(::isSafeReport).count { it == true }.also(::println)
+    reportListLevelDiffs.map(::isSafeReport).count { it == true }.also(::println)
 }
 
 fun read(file: String) = Path(file).readLines()
