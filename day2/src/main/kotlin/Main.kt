@@ -12,7 +12,7 @@ fun main() {
 fun read(file: String): Sequence<List<Int>> =
     Path(file).readLines().asSequence().map { str -> str.split(" ").map(String::toInt) }
 
-fun Sequence<List<Int>>.getLevelDiffs() = map { report -> report.zipWithNext { a, b -> b - a } }
+fun Sequence<List<Int>>.getLevelDiffs(): Sequence<List<Int>> = map { report -> report.zipWithNext { a, b -> b - a } }
 
 fun isSafeReport(levelDiffs: List<Int>): Boolean = levelDiffs.all { it > 0 && it in (1..3) } ||
         levelDiffs.all { it < 0 && -it in (1..3) }
