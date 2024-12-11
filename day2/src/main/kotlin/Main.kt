@@ -22,5 +22,5 @@ fun List<Int>.isSafeReport(): Boolean {
 
 //Fixme: value should be smaller than 350 and bigger than 338
 fun List<Int>.isSafeDampenedReport(): Boolean {
-    return isSafeReport() || any { level -> (this - level).isSafeReport() }
+    return this.isSafeReport() || this.any { level -> (this - level).isSafeReport() }
 }
