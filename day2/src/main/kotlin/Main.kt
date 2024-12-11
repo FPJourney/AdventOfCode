@@ -22,8 +22,8 @@ fun List<Int>.isSafeReport(): Boolean {
             levelDiffs.all { it < 0 && -it in (1..3) }
 }
 
-//Fixme: current value is 357 but should be smaller than 350
+//Fixme: current value is 357 but should be smaller than 350 and bigger than 338
 fun List<Int>.isSafeReportDampened(): Boolean {
-    val levelDiffs = getLevelDiffs()
-    return levelDiffs.isSafeReport() || any { level -> (this - level).isSafeReport() }
+
+    return isSafeReport() || any { level -> (this - level).isSafeReport() }
 }
