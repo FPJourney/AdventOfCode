@@ -6,9 +6,7 @@ import kotlin.io.path.readLines
 fun main() {
     val reportList: Sequence<List<Int>> = read("day2/Input.txt")
     reportList.count { it.isSafeReport() }.also(::println) //this is correct: 279
-    reportList
-        .count { it.isSafeReportDampened() }
-        .also(::println) // should be smaller than 350!!
+    reportList.count { it.isSafeDampenedReport() }.also(::println) // should be smaller than 350!!
 }
 
 fun read(file: String): Sequence<List<Int>> =
@@ -23,7 +21,6 @@ fun List<Int>.isSafeReport(): Boolean {
 }
 
 //Fixme: current value is 357 but should be smaller than 350 and bigger than 338
-fun List<Int>.isSafeReportDampened(): Boolean {
-
+fun List<Int>.isSafeDampenedReport(): Boolean {
     return isSafeReport() || any { level -> (this - level).isSafeReport() }
 }
