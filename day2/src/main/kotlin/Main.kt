@@ -7,7 +7,7 @@ fun main() {
     val reportList: Sequence<List<Int>> = read("day2/Input.txt")
     reportList.count { it.isSafeReport() }.also(::println) //this is correct: 279
     reportList
-        .count(::isSafeReportDampened)
+        .count { it.isSafeReportDampened() }
         .also(::println) // should be smaller than 350!!
 }
 
@@ -23,8 +23,7 @@ fun List<Int>.isSafeReport(): Boolean {
 }
 
 //Fixme: current value is 357 but should be smaller than 350
-fun isSafeReportDampened(report: List<Int>): Boolean {
-    val levelDiffs = report.getLevelDiffs()
-    return levelDiffs.isSafeReport() ||
-            report.any { level -> (report - level).isSafeReport() }
+fun List<Int>.isSafeReportDampened(): Boolean {
+    val levelDiffs = getLevelDiffs()
+    return levelDiffs.isSafeReport() || any { level -> (this - level).isSafeReport() }
 }
