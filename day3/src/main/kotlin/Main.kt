@@ -6,15 +6,14 @@ import kotlin.io.path.readLines
 fun main() {
     val part1Regex = Regex("mul\\(\\d{1,3},\\d{1,3}\\)")
     val multsLists = read("day3/Input.txt")
-    val multResultsLists: Sequence<List<Long>> =
-        multsLists.parseInput(part1Regex).map { strings -> strings.map(::calculateMul) }
-    val summedResultsList = multResultsLists.map { it.sum() }
-    // summedResultsList.forEach(::println)
-    println(summedResultsList.sum())
+    multsLists.parseInput(part1Regex)
+        .flatMap { strings -> strings.map(::calculateMul) }
+        .sum()
+        .also(::println)
     val part2Regex = Regex("do\\(\\)|don't\\(\\)|mul\\(\\d{1,3},\\d{1,3}\\)")
     multsLists.parseInput(part2Regex)
-        .map { strings -> strings.filterNot { it == "do()" || it == "don't()" }.map(::calculateMul) }
-        .map { it.sum() }
+        .flatMap { strings -> strings.filterNot { it == "do()" || it == "don't()" }.map(::calculateMul) }
+        //.map { it.sum() }
         .sum()
         .also(::println)
 }
