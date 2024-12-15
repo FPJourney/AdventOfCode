@@ -11,9 +11,9 @@ fun main() {
     val summedResultsList = multResultsLists.map { it.sum() }
     // summedResultsList.forEach(::println)
     println(summedResultsList.sum())
-    val part2Regex = Regex("(do\\(\\)|don't\\(\\))?mul\\(\\d{1,3},\\d{1,3}\\)")
+    val part2Regex = Regex("do\\(\\)|don't\\(\\)|mul\\(\\d{1,3},\\d{1,3}\\)")
     multsLists.parseInput(part2Regex)
-        .map { strings -> strings.map(::calculateMul) }
+        .map { strings -> strings.filterNot { it == "do()" || it == "don't()" }.map(::calculateMul) }
         .map { it.sum() }
         .sum()
         .also(::println)
