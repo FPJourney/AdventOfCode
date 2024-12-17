@@ -4,7 +4,8 @@ import kotlin.io.path.Path
 import kotlin.io.path.readLines
 
 fun main() {
-    read("day4/Input.txt").count().also(::println)
+    val pattern = "XMAS".toRegex()
+    read("day4/Input.txt").count { it.contains(pattern) }.also(::println)
 }
 
 fun read(file: String): Sequence<String> =
