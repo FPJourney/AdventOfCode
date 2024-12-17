@@ -31,7 +31,7 @@ fun calculateMulConditionally(acc: Pair<Boolean, Long>, str: String): Pair<Boole
     val (flag, sum) = acc
     return when (str) {
         "do()" -> Pair(true, sum)
-        "don't" -> Pair(false, sum)
+        "don't()" -> Pair(false, sum)
         else -> when (Pair(flag, sum)) {
             Pair(true, sum) -> Pair(true, sum + calculateMul(str))
             Pair(false, sum) -> Pair(false, sum)
