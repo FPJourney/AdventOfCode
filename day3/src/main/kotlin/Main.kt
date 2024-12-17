@@ -13,8 +13,6 @@ fun main() {
     val part2Regex = Regex("""do\(\)|don't\(\)|mul\(\d{1,3},\d{1,3}\)""")
     multsLists.parseInput(part2Regex)
         .fold(Pair(true, 0L), ::calculateMulConditionally)
-        //.map { it.sum() }
-//        .sum()
         .also { println(it.second) }
 }
 
