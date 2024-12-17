@@ -15,7 +15,7 @@ fun main() {
         .fold(Pair(true, 0L), ::calculateMulConditionally)
         //.map { it.sum() }
 //        .sum()
-        .also(::println)
+        .also { println(it.second) }
 }
 
 fun read(file: String): Sequence<String> =
