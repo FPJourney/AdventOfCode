@@ -26,11 +26,11 @@ fun calculateMul(mul: String): Long =
     Regex("\\d{1,3}").findAll(mul).map { it.value.toLong() }.reduce { a, b -> a * b }
 
 fun calculateMulConditionally(acc: Pair<Boolean, Long>, str: String): Pair<Boolean, Long> {
-    val (flag, sum) = acc
+    val (_, sum) = acc
     return when (str) {
         "do()" -> Pair(true, sum)
         "don't()" -> Pair(false, sum)
-        else -> when (Pair(flag, sum)) {
+        else -> when (acc) {
             Pair(true, sum) -> Pair(true, sum + calculateMul(str))
             Pair(false, sum) -> Pair(false, sum)
             else -> acc
