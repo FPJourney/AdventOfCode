@@ -5,7 +5,9 @@ import kotlin.io.path.readLines
 
 fun main() {
     val pattern = "XMAS".toRegex()
-    read("day4/Input.txt").count { it.contains(pattern) }.also(::println)
+    val lines = read("day4/Input.txt")
+    lines.flatMap { line -> pattern.findAll(line).map { it.value } }.count().also(::println)
+    lines.flatMap { line -> pattern.findAll(line).map { it.value } }.count().also(::println)
 }
 
 fun read(file: String): Sequence<String> =
