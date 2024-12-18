@@ -8,7 +8,7 @@ fun main() {
     val patternValue = "XMAS".sumOf { it.code } //313
 //    println("pattern value is $patternValue")
     val lines = read("day4/Input.txt")
-    //Input is a 140 * 140 matrix
+    //Input is a 140 * 140 matrix and only contains letters in the word XMAS
 //    lines.first().count().also(::println)
 //    lines.count().also(::println)
     lines.flatMap { line -> pattern.findAll(line).map { it.value } }.count().also(::println)
