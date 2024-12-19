@@ -4,10 +4,11 @@ import kotlin.io.path.Path
 import kotlin.io.path.readLines
 
 fun main() {
-    val part1Regex = Regex("mul\\(\\d{1,3},\\d{1,3}\\)")
+    val part1Regex = Regex("""mul\((\d{1,3}),(\d{1,3})\)""")
     val multsLists = read("day3/Input.txt")
-    multsLists.parseInput(part1Regex)
-        .map(::calculateMul)
+//    multsLists.parseInput(part1Regex)
+//        .map(::calculateMul)
+    multsLists.parseAndCalculateMul(part1Regex)
         .sum()
         .also(::println)
     val part2Regex = Regex("""do\(\)|don't\(\)|mul\(\d{1,3},\d{1,3}\)""")
@@ -37,3 +38,11 @@ fun calculateMulConditionally(acc: Pair<Boolean, Long>, str: String): Pair<Boole
         }
     }
 }
+
+fun Sequence<String>.parseAndCalculateMul(regex: Regex): Sequence<Long> =
+    map { str ->
+        regex.findAll(str).sumOf {
+            val (a, b) = it.destructured
+            a.toLong() * b.toLong()
+        }
+    }
